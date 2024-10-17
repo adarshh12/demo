@@ -1,11 +1,11 @@
 trigger:
-- master  # Pipeline triggers when there’s a push to the master branch
+- master  # Trigger on master branch
 
 pool:
-  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu VM
+  name: 'MySelfHostedPool'  # Use your self-hosted agent pool
 
 steps:
-# Use the correct Python version
+# Use Python 3.x
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.x'
@@ -21,10 +21,10 @@ steps:
 # Run the Python script (model.py)
 - script: |
     source env/bin/activate
-    python src/model.py  # Make sure the path matches where your Python script is
+    python src/model.py  # Path to your Python script
   displayName: 'Run Machine Learning Model'
 
-# Optional: Output something on success
+# Completion time
 - task: Bash@3
   inputs:
     targetType: 'inline'
